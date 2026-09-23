@@ -1,0 +1,554 @@
+/* Final layout contract: viewport owns the height; content owns its readable size. */
+[hidden] {
+  display: none !important;
+}
+.app-shell {
+  box-sizing: border-box;
+  height: 100dvh;
+  width: 100%;
+  max-width: 1440px;
+  padding: max(8px, env(safe-area-inset-top)) max(10px, env(safe-area-inset-right))
+    max(8px, env(safe-area-inset-bottom)) max(10px, env(safe-area-inset-left));
+}
+.app-shell > main {
+  min-width: 0;
+  gap: 8px;
+}
+.app-shell .page-heading,
+.app-shell .save-footer {
+  display: none;
+}
+.hud {
+  min-width: 0;
+  padding: 8px 12px;
+}
+.hud > *,
+.workspace > *,
+.item-card > *,
+.contract-milestone > * {
+  min-width: 0;
+}
+.hud strong {
+  overflow-wrap: anywhere;
+}
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(300px, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+  gap: 12px;
+}
+.workspace .scene-panel {
+  height: 100%;
+  min-height: 0;
+}
+.workspace .action-column {
+  min-width: 0;
+  overflow: visible;
+  justify-content: center;
+}
+.workspace .project-card {
+  flex: 0 0 auto;
+  padding: 14px;
+}
+.workspace .project-card h2 {
+  font-size: 22px;
+  line-height: 1.2;
+  margin: 0;
+}
+.workspace .project-card .muted {
+  display: block;
+  font-size: 14px;
+  margin: 6px 0;
+}
+.workspace .project-rewards {
+  position: static;
+  margin: 6px 0;
+}
+.workspace .progress-label {
+  font-size: 14px;
+  gap: 8px;
+  margin: 6px 0;
+}
+.workspace .work-button {
+  min-height: 48px;
+  height: auto;
+  margin-top: 8px;
+  padding: 10px;
+}
+.workspace .work-button strong {
+  font-size: 18px;
+}
+.workspace .work-button small {
+  font-size: 12px;
+}
+.workspace .focus-row {
+  margin: 6px 0;
+  font-size: 12px;
+}
+.workspace .focus-hint,
+.workspace .card-top {
+  display: none;
+}
+.workspace .queue-notice {
+  font-size: 12px;
+}
+.workspace .goal-card {
+  padding: 8px 10px;
+}
+.workspace .goal-card h3,
+.workspace .goal-progress {
+  font-size: 13px;
+}
+.workspace .expand-button {
+  font-size: 13px;
+  min-height: 40px;
+}
+.bottom-nav {
+  flex-shrink: 0;
+  z-index: 2;
+}
+.bottom-nav .nav-button {
+  min-height: 44px;
+  font-size: 12px;
+}
+.tab-panel {
+  gap: 8px;
+}
+.panel-heading {
+  padding: 0;
+}
+.panel-heading h2 {
+  font-size: 22px;
+}
+.panel-heading p {
+  display: none;
+}
+.team-switch {
+  flex-shrink: 0;
+}
+.finance-switch {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.finance-switch button {
+  min-width: 0;
+  padding-inline: 4px;
+}
+@media (max-width: 480px) {
+  .finance-switch {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+.team-switch button {
+  min-height: 40px;
+  font-size: 14px;
+}
+.tab-panel .item-grid,
+.tab-panel .contract-route {
+  display: grid;
+  align-items: start;
+  align-content: start;
+  gap: 12px;
+}
+.tab-panel .item-card,
+.tab-panel .operation-card,
+.tab-panel .contract-milestone {
+  height: auto;
+  min-height: 0;
+  min-width: 0;
+  padding: 14px;
+}
+.tab-panel .item-card p,
+.tab-panel .contract-milestone p {
+  font-size: 14px;
+  line-height: 1.35;
+}
+.tab-panel .secondary-button,
+.tab-panel .dismiss-button {
+  min-height: 40px;
+  font-size: 14px;
+}
+.tab-panel[data-view='team'] .employee-card {
+  display: flex;
+  gap: 10px;
+  padding: 14px;
+}
+.tab-panel[data-view='team'] .employee-header {
+  gap: 12px;
+}
+.tab-panel[data-view='team'] .employee-identity h3 {
+  font-size: 21px;
+}
+.tab-panel[data-view='team'] svg.employee-portrait {
+  width: 66px;
+  height: 73px;
+  flex-shrink: 0;
+}
+.tab-panel[data-view='team'] .item-stats b {
+  font-size: 20px;
+}
+.missions-panel {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  gap: 8px;
+}
+.mission-list,
+.finance-list {
+  min-height: 0;
+  flex: 1;
+  gap: 12px;
+  align-content: start;
+}
+.panel-pager {
+  min-height: 40px;
+  gap: 12px;
+  margin: 0;
+}
+.panel-pager button {
+  min-height: 40px;
+  font-size: 14px;
+}
+.content-paged {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+  height: auto !important;
+}
+.content-paged > * {
+  flex-shrink: 0;
+  grid-area: auto !important;
+}
+.content-paged > .content-pager {
+  margin-top: auto;
+}
+.content-pager {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 40px;
+}
+.content-pager button {
+  padding: 6px 10px;
+  min-height: 40px;
+  border: 1px solid #718797;
+  border-radius: 6px;
+  background: #263846;
+  color: #f4dfbe;
+  font: inherit;
+  font-size: 14px;
+}
+.content-pager button:disabled {
+  opacity: 0.45;
+}
+.content-pager span {
+  white-space: nowrap;
+  font-size: 13px;
+}
+#game-dialog {
+  box-sizing: border-box;
+  width: min(480px, calc(100vw - 24px));
+  padding: 12px;
+  max-height: calc(100dvh - 24px);
+}
+.dialog-content {
+  min-width: 0;
+}
+.dialog-content p,
+.dialog-content .fine-print {
+  font-size: 14px;
+  line-height: 1.35;
+}
+.dialog-content .statistics > div {
+  gap: 12px;
+}
+.dialog-content .statistics dd {
+  overflow-wrap: anywhere;
+}
+@media (max-width: 760px) and (min-height: 501px),
+  (max-width: 1000px) and (orientation: portrait) and (min-height: 501px) {
+  .workspace {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .workspace .scene-panel {
+    flex: 1 1 0;
+    height: 0;
+  }
+  .workspace .action-column {
+    flex: 0 0 auto;
+    gap: 6px;
+  }
+  .workspace .project-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-rows: auto auto auto auto;
+    gap: 4px 10px;
+    padding: 10px;
+  }
+  .workspace .project-card h2 {
+    grid-column: 1;
+    grid-row: 1;
+    font-size: 18px;
+    padding: 0;
+  }
+  .workspace .project-card .muted {
+    grid-column: 1 / -1;
+    grid-row: 5;
+    margin: 0;
+    font-size: 12px;
+  }
+  .workspace .project-rewards {
+    grid-column: 1;
+    grid-row: 2;
+    margin: 0;
+  }
+  .workspace .project-rewards .reward-money {
+    font-size: 14px;
+  }
+  .workspace .progress-label {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    margin: 0;
+  }
+  .workspace #project-bar {
+    grid-column: 1 / -1;
+    grid-row: 4;
+    height: 7px;
+  }
+  .workspace .work-button {
+    grid-column: 2;
+    grid-row: 1 / 3;
+    width: auto;
+    min-width: 112px;
+    height: 52px;
+    margin: 0;
+  }
+  .workspace .work-button > svg,
+  .workspace .work-arrow {
+    display: none;
+  }
+  .workspace .focus-row {
+    grid-column: 1 / -1;
+    grid-row: 6;
+    margin: 0;
+  }
+  .workspace .queue-notice {
+    grid-column: 1 / -1;
+    grid-row: 7;
+    margin: 0;
+  }
+  .scene-caption {
+    padding: 6px 10px;
+  }
+  .office-footer {
+    display: none;
+  }
+}
+@media (max-height: 500px) and (min-width: 600px) {
+  .tab-panel[data-view='team'] .employee-card:not(.employee-development):not(.content-paged) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+    gap: 4px 14px;
+    padding: 8px;
+  }
+  .employee-card:not(.employee-development) .employee-header {
+    grid-column: 1;
+    grid-row: 1 / 3;
+  }
+  .employee-card:not(.employee-development) .employee-tabs {
+    grid-column: 2;
+    grid-row: 1;
+    padding: 0;
+  }
+  .employee-card:not(.employee-development) .employee-tabs button {
+    min-height: 32px;
+    padding: 4px;
+  }
+  .employee-card:not(.employee-development) .item-stats {
+    grid-column: 2;
+    grid-row: 2;
+  }
+  .tab-panel[data-view='team'] .employee-card:not(.employee-development) .item-stats > span {
+    padding: 4px 8px;
+    gap: 2px;
+    line-height: 1.2;
+  }
+  .tab-panel[data-view='team'] .employee-card:not(.employee-development) .item-stats b {
+    line-height: 1.2;
+  }
+  .employee-card:not(.employee-development) .allocation-button {
+    grid-column: 1;
+    grid-row: 3;
+  }
+  .tab-panel[data-view='team'] .employee-card:not(.employee-development) .dismiss-button {
+    grid-column: 2;
+    grid-row: 3;
+    min-height: 36px;
+    padding: 6px;
+  }
+  .app-shell > main {
+    gap: 4px;
+  }
+  .app-shell .hud {
+    padding: 4px 10px;
+    min-height: 0;
+  }
+  .hud .metric-icon {
+    display: none;
+  }
+  .hud .wallet strong {
+    font-size: 22px;
+  }
+  .hud .income strong,
+  .hud .reputation strong {
+    font-size: 16px;
+  }
+  .hud .small-label {
+    font-size: 11px;
+  }
+  .team-switch {
+    padding: 2px;
+  }
+  .team-switch button {
+    min-height: 36px;
+    padding-block: 6px;
+  }
+  .tab-panel {
+    gap: 4px;
+  }
+  .tab-panel[data-view='team'] .employee-card {
+    padding: 10px;
+  }
+  .tab-panel[data-view='team'] .employee-header {
+    gap: 10px;
+  }
+  .tab-panel[data-view='team'] svg.employee-portrait {
+    width: 54px;
+    height: 60px;
+  }
+  .bottom-nav {
+    padding: 2px;
+  }
+  .bottom-nav .nav-button {
+    min-height: 40px;
+    padding: 4px;
+  }
+  .bottom-nav svg {
+    width: 16px;
+    height: 16px;
+  }
+  .workspace {
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 1fr);
+    gap: 8px;
+  }
+  .workspace .action-column {
+    gap: 4px;
+  }
+  .workspace .project-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 112px;
+    gap: 4px 8px;
+    padding: 8px;
+  }
+  .workspace .project-card h2 {
+    grid-column: 1;
+    grid-row: 1;
+    font-size: 18px;
+  }
+  .workspace .project-card .muted {
+    grid-column: 1 / -1;
+    grid-row: 5;
+    font-size: 12px;
+    margin: 0;
+  }
+  .workspace .project-rewards {
+    grid-column: 1;
+    grid-row: 2;
+    margin: 0;
+  }
+  .workspace .progress-label {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    margin: 0;
+  }
+  .workspace #project-bar {
+    grid-column: 1 / -1;
+    grid-row: 4;
+  }
+  .workspace .work-button {
+    grid-column: 2;
+    grid-row: 1 / 3;
+    width: 112px;
+    margin: 0;
+    padding: 6px;
+  }
+  .workspace .work-button > svg,
+  .workspace .work-arrow {
+    display: none;
+  }
+  .workspace .focus-row {
+    grid-column: 1 / -1;
+    grid-row: 6;
+    margin: 0;
+  }
+  .workspace .queue-notice {
+    grid-column: 1 / -1;
+    grid-row: 7;
+    margin: 0;
+  }
+  .workspace .goal-card {
+    padding: 4px 8px;
+  }
+  .scene-caption .eyebrow,
+  .office-footer {
+    display: none;
+  }
+  .panel-heading {
+    display: none;
+  }
+  .bottom-nav .nav-button {
+    flex-direction: row;
+  }
+}
+@media (max-width: 599px) and (max-height: 500px) {
+  .workspace {
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+  }
+  .workspace .scene-panel {
+    flex: 1;
+    min-width: 0;
+  }
+  .workspace .action-column {
+    flex: 1.5;
+  }
+  .workspace .project-card {
+    display: flex;
+    padding: 8px;
+    gap: 2px;
+  }
+  .workspace .project-card h2 {
+    font-size: 16px;
+  }
+  .workspace .work-button {
+    width: 100%;
+    min-height: 40px;
+    height: 40px;
+  }
+  .workspace .project-card .muted,
+  .workspace .focus-row,
+  .scene-caption,
+  .office-footer {
+    display: none;
+  }
+  .workspace .goal-card {
+    padding: 4px;
+  }
+  .panel-heading {
+    display: none;
+  }
+}

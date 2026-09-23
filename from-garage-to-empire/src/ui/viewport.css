@@ -1,0 +1,1350 @@
+/* A bounded game viewport: the play screen never grows with management content. */
+html,
+body,
+#app {
+  height: 100%;
+  overflow: hidden;
+}
+body {
+  padding: 0;
+}
+.app-shell {
+  height: 100dvh;
+  min-height: 0;
+  margin: 0 auto;
+  padding: 12px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow: hidden;
+}
+.topbar {
+  flex: none;
+  padding: 0 0 8px;
+}
+.wordmark {
+  font-size: 17px;
+}
+.brand-icon {
+  width: 32px;
+  height: 32px;
+}
+.brand-second {
+  font-size: 8px;
+}
+.app-shell > main {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  gap: 8px;
+}
+.page-heading {
+  padding: 0;
+  flex: none;
+}
+.page-heading h1 {
+  font-size: 23px;
+  margin: 0;
+}
+.page-heading p,
+.page-heading .eyebrow {
+  display: none;
+}
+.hud {
+  flex: none;
+  padding: 10px 16px;
+  margin: 0;
+}
+.wallet strong {
+  font-size: 25px;
+}
+.workspace {
+  flex: 1;
+  min-height: 0;
+  align-items: stretch;
+  gap: 12px;
+}
+.scene-panel {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  height: 100%;
+}
+.scene-caption,
+.office-footer {
+  flex: none;
+  padding: 8px 12px;
+}
+#office-canvas {
+  flex: 1;
+  min-height: 0;
+  height: 0;
+  aspect-ratio: auto;
+  max-height: none;
+  margin: 0;
+  overflow: hidden;
+}
+.tutorial {
+  flex: none;
+  padding: 9px 12px;
+  min-height: 0;
+}
+.tutorial p {
+  font-size: 11px;
+}
+.action-column {
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow: hidden;
+}
+.project-card {
+  padding: 16px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.project-card h2 {
+  font-size: 23px;
+}
+.card-top {
+  margin-bottom: 6px;
+}
+.project-rewards {
+  margin: 10px 0;
+}
+.progress-label {
+  margin: 8px 0 5px;
+}
+.focus-row {
+  margin: 10px 0;
+}
+.work-button {
+  min-height: 58px;
+  padding: 12px;
+  margin-top: auto;
+  flex: none;
+}
+.work-button strong {
+  font-size: 19px;
+}
+.focus-hint {
+  margin: 8px 0 0;
+}
+.queue-notice {
+  margin: 7px 0 0;
+  padding: 5px 8px;
+  font-size: 10px;
+}
+.goal-card {
+  flex: none;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 4px 10px;
+  padding: 10px 12px;
+  align-items: center;
+}
+.goal-card > .eyebrow,
+.goal-card > p,
+.goal-card > .progress-track,
+#goal-percent {
+  display: none;
+}
+.goal-card h3 {
+  font-size: 13px;
+  margin: 0;
+}
+.goal-progress {
+  margin: 0;
+  font-size: 10px;
+  grid-column: 1;
+}
+.expand-button {
+  grid-column: 2;
+  grid-row: 1 / 3;
+  margin: 0;
+  padding: 8px;
+  min-height: 40px;
+  font-size: 11px;
+}
+.bottom-nav {
+  position: static;
+  flex: none;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  padding: 4px;
+  gap: 3px;
+  box-shadow: none;
+}
+.nav-button {
+  min-width: 0;
+  min-height: 44px;
+  padding: 8px 4px;
+  gap: 5px;
+  font-size: 11px;
+}
+.save-footer {
+  flex: none;
+  margin: 0;
+  padding: 0;
+  font-size: 9px;
+}
+.tab-panel {
+  flex: 1;
+  min-height: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow: hidden;
+}
+.panel-heading {
+  flex: none;
+  margin: 0;
+  padding: 4px 0;
+}
+.panel-heading h2 {
+  font-size: 22px;
+  margin: 0;
+}
+.panel-heading .eyebrow {
+  display: none;
+}
+.panel-heading p {
+  margin: 4px 0 0;
+  font-size: 11px;
+}
+.tab-panel .item-grid,
+.tab-panel .contract-route {
+  min-height: 0;
+  flex: 1;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-content: start;
+  overflow: hidden;
+  overscroll-behavior: contain;
+}
+.panel-pager {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  font:
+    12px Consolas,
+    monospace;
+}
+.panel-pager button {
+  min-height: 38px;
+  padding: 8px 16px;
+  border: 1px solid #536375;
+  border-radius: 5px;
+  background: #314454;
+  color: #f4dcba;
+}
+.panel-pager button:disabled {
+  opacity: 0.4;
+}
+.missions-panel {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  padding: 14px;
+}
+.mission-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+.mission-help {
+  margin: 8px 0 12px;
+}
+.toast {
+  bottom: 80px;
+}
+@media (max-width: 700px) {
+  .app-shell {
+    padding: calc(6px + env(safe-area-inset-top, 0px)) 8px
+      calc(6px + env(safe-area-inset-bottom, 0px));
+    gap: 5px;
+  }
+  .topbar {
+    display: none;
+  }
+  .app-shell > main {
+    gap: 6px;
+  }
+  .page-heading h1 {
+    font-size: 18px;
+  }
+  .level-badge {
+    padding: 4px 7px;
+  }
+  .hud {
+    padding: 7px 10px;
+    gap: 6px;
+  }
+  .wallet strong {
+    font-size: 20px;
+  }
+  .metric-icon {
+    width: 23px;
+    height: 26px;
+  }
+  .workspace {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .scene-panel {
+    flex: 1;
+    height: 0;
+  }
+  .scene-caption,
+  .office-footer {
+    padding: 5px 9px;
+  }
+  .tutorial {
+    display: none;
+  }
+  .action-column {
+    flex: none;
+    overflow: visible;
+    gap: 6px;
+  }
+  .project-card {
+    display: block;
+    padding: 10px 12px;
+  }
+  .card-top {
+    display: none;
+  }
+  .project-card h2 {
+    font-size: 17px;
+    padding-right: 95px;
+  }
+  .project-rewards {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    margin: 0;
+  }
+  .project-card .muted {
+    display: none;
+  }
+  .progress-label {
+    margin: 7px 0 4px;
+    font-size: 10px;
+  }
+  .progress-track {
+    height: 7px;
+  }
+  .focus-row {
+    margin: 6px 0;
+    font-size: 9px;
+  }
+  .work-button {
+    min-height: 48px;
+    padding: 7px 12px;
+    margin: 0;
+  }
+  .work-button strong {
+    font-size: 18px;
+  }
+  .focus-hint {
+    display: none;
+  }
+  .goal-card {
+    padding: 5px 10px;
+  }
+  .goal-card h3 {
+    font-size: 12px;
+  }
+  .expand-button {
+    min-height: 36px;
+    padding: 5px;
+  }
+  .bottom-nav {
+    padding: 3px;
+    border-radius: 6px;
+  }
+  .nav-button {
+    flex-direction: column;
+    min-height: 43px;
+    gap: 3px;
+    padding: 4px 1px;
+    font-size: 9px;
+  }
+  .nav-button svg {
+    width: 17px;
+    height: 17px;
+  }
+  .save-footer {
+    font-size: 8px;
+  }
+  .save-footer svg {
+    width: 12px;
+    height: 12px;
+  }
+  .tab-panel {
+    gap: 6px;
+  }
+  .tab-panel .item-grid,
+  .tab-panel .contract-route,
+  .mission-list {
+    grid-template-columns: 1fr;
+  }
+  .panel-heading h2 {
+    font-size: 18px;
+  }
+  .panel-heading p {
+    font-size: 10px;
+  }
+  .item-card {
+    padding: 14px;
+  }
+  svg.employee-portrait {
+    width: 64px;
+    height: 71px;
+  }
+  .employee-identity h3 {
+    font-size: 18px;
+    margin: 5px 0;
+  }
+  .career-bonus {
+    margin: 9px 0 3px;
+  }
+  .item-stats {
+    margin: 10px 0;
+  }
+  .career-path {
+    margin: 10px 0 6px;
+  }
+  .training-preview {
+    margin: 7px 0;
+  }
+  .missions-panel {
+    padding: 12px;
+  }
+}
+@media (max-height: 550px) and (min-width: 701px) {
+  .topbar,
+  .page-heading,
+  .tutorial,
+  .focus-hint,
+  .project-card .muted,
+  .card-top {
+    display: none;
+  }
+  .tab-panel .item-grid,
+  .tab-panel .contract-route,
+  .mission-list {
+    grid-template-columns: 1fr;
+  }
+  .project-card {
+    padding: 10px;
+  }
+  .project-card h2 {
+    font-size: 18px;
+  }
+  .project-rewards {
+    margin: 5px 0;
+  }
+  .work-button {
+    min-height: 44px;
+  }
+}
+@media (max-height: 650px) {
+  .panel-heading p {
+    display: none;
+  }
+}
+
+/* Keep several pending objectives visible and refill each page after a claim. */
+.missions-panel .mission-list {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+.missions-panel .mission-row {
+  padding: 12px;
+  border: 1px solid #425367;
+  border-radius: 6px;
+  background: #263442;
+}
+.missions-panel .mission-row.ready {
+  border-color: #b28b4e;
+  background: #303c3e;
+}
+.missions-panel .mission-heading h4 {
+  font-size: 12px;
+}
+.missions-panel .mission-actions {
+  margin-top: 8px;
+}
+.missions-panel .career-track {
+  margin-top: 7px;
+}
+@media (max-width: 700px) {
+  .missions-panel .mission-list {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .missions-panel .mission-row {
+    padding: 9px 11px;
+  }
+  .missions-panel .mission-help {
+    font-size: 10px;
+    line-height: 1.4;
+    margin: 7px 0 10px;
+  }
+  .missions-panel .mission-actions button {
+    min-height: 36px;
+    padding: 7px 10px;
+  }
+}
+
+.team-switch {
+  display: flex;
+  flex: none;
+  padding: 4px;
+  gap: 5px;
+  border: 1px solid #405266;
+  border-radius: 7px;
+  background: #172430;
+}
+.team-switch button {
+  flex: 1;
+  min-height: 40px;
+  border-radius: 4px;
+  background: transparent;
+  color: #b6c7d5;
+  font-size: 12px;
+  font-weight: 700;
+}
+.team-switch button[aria-pressed='true'] {
+  background: #3a4d58;
+  color: #ffda94;
+  box-shadow: inset 0 -2px #d4a45d;
+}
+.dismiss-button {
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  padding: 9px;
+  border: 1px solid #815e56;
+  border-radius: 5px;
+  background: #3a3033;
+  color: #ecc1b3;
+  font-size: 11px;
+  min-height: 36px;
+}
+.dismiss-button:hover {
+  background: #543b3c;
+}
+.tab-panel[data-view='team'] .item-card,
+.tab-panel[data-view='upgrades'] .item-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-top: 3px solid #769d99;
+}
+.tab-panel[data-view='team'] .hire-card {
+  border-style: solid;
+  border-top-color: #d9ad68;
+}
+.tab-panel[data-view='team'] .hire-card h3 {
+  font-size: 21px;
+  margin: 5px 0;
+}
+.tab-panel[data-view='team'] .hire-card > p {
+  line-height: 1.6;
+  font-size: 12px;
+}
+.tab-panel[data-view='team'] .hire-card .secondary-button {
+  margin-top: auto;
+}
+.tab-panel[data-view='upgrades'] .item-top {
+  margin: 0;
+}
+.tab-panel[data-view='upgrades'] .upgrade-icon {
+  width: 52px;
+  height: 52px;
+  border: 1px solid #667a7c;
+}
+.tab-panel[data-view='upgrades'] .upgrade-effect {
+  padding: 14px;
+  line-height: 1.7;
+  border: 1px solid #425b58;
+}
+.tab-panel[data-view='upgrades'] .secondary-button {
+  margin-top: auto;
+}
+.tab-panel[data-view='contracts'] .contract-milestone {
+  background: #233140;
+  border-top: 3px solid #607587;
+}
+.tab-panel[data-view='contracts'] .contract-milestone.unlocked {
+  border-top-color: #8cb89a;
+}
+.tab-panel[data-view='contracts'] .selected-card {
+  border-top-color: #efbd6c;
+}
+.tab-panel[data-view='contracts'] .contract-facts {
+  border-radius: 5px;
+  padding: 11px;
+  background: #182630;
+  border: 1px solid #3c5061;
+}
+.tab-panel[data-view='contracts'] .requirements {
+  margin: 10px 0;
+}
+.tab-panel[data-view='contracts'] .requirements li {
+  padding: 4px 0;
+  margin: 3px 0;
+  border-bottom: 1px solid #394a56;
+}
+@media (max-width: 700px) {
+  .tab-panel[data-view='team'] .item-card {
+    gap: 3px;
+    padding: 11px;
+  }
+  .tab-panel[data-view='team'] .employee-header {
+    gap: 10px;
+  }
+  .tab-panel[data-view='team'] .career-path {
+    margin: 6px 0;
+  }
+  .tab-panel[data-view='team'] .item-stats {
+    margin: 6px 0;
+  }
+  .tab-panel[data-view='team'] .training-preview {
+    margin: 4px 0;
+    font-size: 11px;
+  }
+  .dismiss-button {
+    margin-top: 5px;
+  }
+  .tab-panel[data-view='contracts'] .contract-milestone {
+    padding: 12px;
+  }
+}
+
+/* All content surfaces have a fixed viewport; complete cards are fitted, never scrolled. */
+.fit-stage {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+.fit-content {
+  position: absolute !important;
+  left: 0;
+  top: 0;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  transform-origin: top left;
+  box-sizing: border-box;
+}
+.tab-panel .fit-content.item-grid,
+.tab-panel .fit-content.contract-route {
+  overflow: visible;
+  align-content: start;
+}
+.fit-content.action-column {
+  overflow: visible;
+  width: 100%;
+}
+.fit-content .project-card {
+  flex: none;
+}
+.workspace > .fit-stage {
+  height: 100%;
+}
+.dialog-content > p {
+  margin: 10px 0;
+  line-height: 1.5;
+  color: #c4ced6;
+}
+.dialog-content .modal-symbol {
+  margin-bottom: 10px;
+}
+.dialog-content h2 {
+  font-size: 21px;
+}
+.dialog-content .modal-button {
+  margin-top: 12px;
+}
+.dialog-content .secondary-button {
+  margin-top: 10px;
+}
+.dialog-content .statistics {
+  margin: 12px 0;
+}
+.dialog-content .fine-print {
+  font-size: 11px;
+}
+#game-dialog {
+  /* Absolute fitted content cannot supply the dialog's intrinsic width. */
+  width: min(430px, calc(100vw - 32px));
+  overflow: hidden;
+  max-height: none;
+  padding: 20px;
+}
+#game-dialog > .fit-stage {
+  flex: none;
+}
+.tab-panel[data-view='team'] .employee-card {
+  gap: 3px;
+}
+.employee-card .career-bonus {
+  margin: 8px 0 3px;
+}
+.employee-card .career-path {
+  margin: 8px 0;
+}
+.employee-card .training-preview {
+  margin: 4px 0;
+}
+.employee-card .item-stats {
+  margin: 8px 0;
+}
+.tab-panel .settings label {
+  padding: 9px 0;
+}
+.tab-panel .statistics > div {
+  padding: 8px 0;
+}
+@media (max-width: 700px) {
+  .workspace > .fit-stage {
+    flex: none;
+    height: min(248px, 56%);
+  }
+  .fit-content.action-column {
+    gap: 5px;
+  }
+  .fit-content .queue-notice {
+    font-size: 10px;
+    line-height: 1.3;
+    padding: 4px 7px;
+  }
+  .fit-content .project-card {
+    padding: 9px 11px;
+  }
+  .tab-panel[data-view='team'] .employee-card {
+    padding: 9px;
+  }
+  .employee-card svg.employee-portrait {
+    width: 52px;
+    height: 57px;
+  }
+  .employee-card .career-path p {
+    font-size: 11px;
+  }
+  .employee-card .secondary-button,
+  .employee-card .dismiss-button {
+    min-height: 34px;
+    padding: 7px 9px;
+  }
+}
+@media (max-height: 550px) {
+  .topbar,
+  .page-heading,
+  .panel-heading p {
+    display: none;
+  }
+  .app-shell {
+    gap: 4px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+  .app-shell > main {
+    gap: 5px;
+  }
+  .hud {
+    padding: 5px 10px;
+  }
+  .panel-heading {
+    padding: 0;
+  }
+  .panel-heading h2 {
+    font-size: 17px;
+  }
+  .panel-pager button {
+    min-height: 32px;
+    padding: 5px 12px;
+  }
+  .nav-button {
+    min-height: 36px;
+    padding: 4px;
+  }
+  .team-switch button {
+    min-height: 32px;
+  }
+}
+
+/* Team information uses separate readable views, never automatic scaling. */
+.tab-panel[data-view='team'] .item-grid {
+  align-content: start;
+  align-items: start;
+}
+.tab-panel[data-view='team'] .employee-card {
+  padding: 18px;
+  gap: 12px;
+}
+.tab-panel[data-view='team'] .employee-header {
+  gap: 16px;
+}
+.tab-panel[data-view='team'] svg.employee-portrait {
+  width: 82px;
+  height: 90px;
+}
+.tab-panel[data-view='team'] .employee-identity h3 {
+  font-size: 23px;
+  margin: 6px 0;
+}
+.tab-panel[data-view='team'] .employee-identity p,
+.tab-panel[data-view='team'] .career-badge {
+  font-size: 13px;
+}
+.employee-tabs {
+  display: flex;
+  padding: 3px;
+  gap: 4px;
+  background: #182531;
+  border-radius: 6px;
+}
+.employee-tabs button {
+  flex: 1;
+  min-height: 36px;
+  padding: 7px 10px;
+  background: transparent;
+  color: #b8c8d7;
+  border-radius: 4px;
+  font-size: 13px;
+}
+.employee-tabs button[aria-pressed='true'] {
+  background: #405563;
+  color: #ffe0a5;
+}
+.tab-panel[data-view='team'] .item-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 0;
+}
+.tab-panel[data-view='team'] .item-stats > span {
+  padding: 12px;
+  background: #172731;
+  border: 1px solid #3b5460;
+  border-radius: 6px;
+  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.tab-panel[data-view='team'] .item-stats b {
+  font-size: 21px;
+  color: #f2dfb9;
+}
+.tab-panel[data-view='team'] .career-bonus {
+  margin: 0;
+  font-size: 13px;
+}
+.allocation-button {
+  min-height: 36px;
+  padding: 6px 10px;
+  border: 1px solid #607587;
+  border-radius: 8px;
+  background: #263846;
+  color: #f2dfb9;
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+.allocation-button:focus-visible {
+  outline: 2px solid #f2dfb9;
+  outline-offset: 2px;
+}
+#project-bar[data-stage='testing'] > span {
+  background: #83b7d4;
+}
+.stage-label {
+  padding: 4px 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  text-decoration: underline dotted;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.stage-label:focus-visible {
+  outline: 2px solid #f2dfb9;
+}
+#project-bar[data-stage='delivery'] > span {
+  background: #a3c783;
+}
+.tab-panel[data-view='team'] .career-path {
+  margin: 0;
+}
+.tab-panel[data-view='team'] .career-path p {
+  font-size: 13px;
+}
+.tab-panel[data-view='team'] .training-preview {
+  margin: 0;
+  padding: 8px 10px;
+  font-size: 14px;
+  line-height: 1.4;
+  background: #182731;
+  border-radius: 5px;
+}
+.tab-panel[data-view='team'] .secondary-button,
+.tab-panel[data-view='team'] .dismiss-button {
+  min-height: 40px;
+  padding: 9px 12px;
+  font-size: 13px;
+  margin: 0;
+}
+@media (max-width: 700px) {
+  .tab-panel[data-view='team'] .employee-card {
+    padding: 12px;
+    gap: 9px;
+  }
+  .tab-panel[data-view='team'] svg.employee-portrait {
+    width: 60px;
+    height: 66px;
+  }
+  .tab-panel[data-view='team'] .employee-identity h3 {
+    font-size: 20px;
+    margin: 4px 0;
+  }
+  .tab-panel[data-view='team'] .item-stats > span {
+    padding: 9px;
+    gap: 4px;
+  }
+  .tab-panel[data-view='team'] .item-stats b {
+    font-size: 19px;
+  }
+  .tab-panel[data-view='team'] .hire-card {
+    gap: 6px;
+    padding: 12px;
+  }
+  .tab-panel[data-view='team'] .hire-card .fine-print {
+    font-size: 12px !important;
+  }
+}
+@media (max-height: 700px) {
+  #app[data-tab='team'] .page-heading,
+  #app[data-tab='team'] .topbar {
+    display: none;
+  }
+  .tab-panel[data-view='team'] .panel-heading {
+    display: none;
+  }
+  .tab-panel[data-view='team'] .employee-card {
+    gap: 7px;
+    padding: 10px;
+  }
+  .tab-panel[data-view='team'] svg.employee-portrait {
+    width: 54px;
+    height: 60px;
+  }
+  .tab-panel[data-view='team'] .career-track {
+    display: none;
+  }
+}
+@media (max-height: 480px) and (min-width: 701px) {
+  .tab-panel[data-view='team'] .employee-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 16px;
+  }
+  .tab-panel[data-view='team'] .employee-header {
+    grid-column: 1;
+    grid-row: 1 / 3;
+  }
+  .tab-panel[data-view='team'] .employee-tabs {
+    grid-column: 2;
+  }
+  .tab-panel[data-view='team'] .item-stats,
+  .tab-panel[data-view='team'] .dismiss-button {
+    grid-column: 2;
+  }
+  .tab-panel[data-view='team'] .career-bonus {
+    grid-column: 1;
+  }
+}
+
+@media (max-height: 700px) {
+  .tab-panel[data-view='team'] .employee-development .employee-portrait,
+  .tab-panel[data-view='team'] .employee-development .career-badge,
+  .tab-panel[data-view='team'] .employee-development .employee-identity > p {
+    display: none;
+  }
+  .tab-panel[data-view='team'] .employee-development .employee-identity h3 {
+    margin: 0;
+    font-size: 20px;
+  }
+  .tab-panel[data-view='team'] .hire-card {
+    gap: 5px;
+    padding: 10px;
+  }
+  .tab-panel[data-view='team'] .hire-card > .eyebrow {
+    display: none;
+  }
+  .tab-panel[data-view='team'] .hire-card h3 {
+    font-size: 20px;
+    margin: 0;
+  }
+  .tab-panel[data-view='team'] .hire-card > p {
+    font-size: 12px;
+    line-height: 1.4;
+    margin: 0;
+  }
+  .tab-panel[data-view='team'] .hire-card .item-stats > span {
+    padding: 8px;
+  }
+}
+
+/* Readable native sizes: navigation changes content, never the scale of the UI. */
+.camera-button {
+  margin-left: auto;
+  padding: 6px 10px;
+  min-height: 32px;
+  border: 1px solid #79919d;
+  border-radius: 4px;
+  color: #f7e5c8;
+  background: #354955;
+  font-size: 12px;
+}
+.topbar,
+.tutorial {
+  display: none;
+}
+.page-heading {
+  padding: 0;
+}
+.page-heading h1 {
+  font-size: 22px;
+}
+.hud .small-label {
+  font-size: 11px;
+}
+.hud .wallet strong {
+  font-size: 26px;
+}
+.hud .income strong,
+.hud .reputation strong {
+  font-size: 18px;
+}
+.bottom-nav .nav-button {
+  font-size: 12px;
+  min-height: 48px;
+}
+.work-button strong {
+  font-size: 21px;
+}
+.work-button small,
+.focus-row,
+.progress-label {
+  font-size: 12px;
+}
+.project-card .muted {
+  font-size: 14px;
+}
+.project-card {
+  flex: none;
+}
+.action-column {
+  justify-content: center;
+}
+.tab-panel .item-card p,
+.tab-panel .milestone-content > p {
+  font-size: 14px;
+}
+.tab-panel .secondary-button {
+  font-size: 14px;
+  min-height: 42px;
+}
+.tab-panel .requirements li {
+  font-size: 13px;
+}
+.tab-panel .contract-status,
+.tab-panel .contract-facts span {
+  font-size: 12px;
+}
+.tab-panel .milestone-content h3 {
+  font-size: 22px;
+}
+.tab-panel .contract-milestone {
+  padding: 14px;
+  gap: 10px;
+}
+.tab-panel .milestone-content > p {
+  margin: 6px 0 10px;
+}
+.tab-panel .requirements {
+  margin: 8px 0;
+}
+.missions-panel .mission-heading h4 {
+  font-size: 14px;
+}
+.missions-panel .mission-actions b,
+.missions-panel .mission-actions button {
+  font-size: 13px;
+}
+#game-dialog {
+  padding: 16px;
+}
+.dialog-content > p {
+  font-size: 14px;
+}
+.dialog-content .modal-symbol {
+  display: none;
+}
+.dialog-content h2 {
+  margin: 0 0 12px;
+}
+@media (max-width: 700px) {
+  .workspace {
+    gap: 6px;
+  }
+  .scene-panel {
+    flex: 1;
+  }
+  .scene-caption .eyebrow,
+  .office-footer .working-label {
+    display: none;
+  }
+  .scene-caption {
+    padding: 4px 8px;
+  }
+  .camera-button {
+    margin-left: 0;
+  }
+  .scene-capacity {
+    margin-left: auto;
+    font-size: 11px;
+  }
+  .office-footer {
+    display: none;
+  }
+  .action-column {
+    gap: 5px;
+  }
+  .project-card {
+    padding: 9px 11px;
+  }
+  .project-card h2 {
+    font-size: 19px;
+  }
+  .focus-row {
+    margin: 5px 0;
+  }
+  .work-button {
+    min-height: 48px;
+  }
+  .goal-card {
+    padding: 4px 10px;
+  }
+  .goal-card h3 {
+    font-size: 13px;
+  }
+  .goal-progress {
+    font-size: 11px;
+  }
+  .expand-button {
+    font-size: 12px;
+  }
+  .bottom-nav .nav-button {
+    font-size: 11px;
+    min-height: 44px;
+  }
+  .hud {
+    padding: 6px 8px;
+  }
+  .hud .metric-icon {
+    display: none;
+  }
+  .hud .wallet strong {
+    font-size: 23px;
+  }
+  .hud .income strong,
+  .hud .reputation strong {
+    font-size: 16px;
+  }
+  .missions-panel .mission-help {
+    font-size: 12px;
+  }
+  .tab-panel .milestone-content > p {
+    font-size: 13px;
+  }
+  .tab-panel .contract-facts {
+    padding: 8px !important;
+    gap: 8px;
+  }
+  .tab-panel .requirements li {
+    padding: 2px 0 !important;
+  }
+}
+@media (max-height: 600px) {
+  .page-heading,
+  .scene-caption .eyebrow,
+  .focus-hint,
+  .project-card .muted {
+    display: none;
+  }
+  .project-card h2 {
+    font-size: 19px;
+  }
+  .project-rewards {
+    margin: 5px 0;
+  }
+  .project-card {
+    padding: 10px;
+  }
+  .dialog-content .statistics > div {
+    padding: 6px 0;
+  }
+  .dialog-content > p {
+    margin: 7px 0;
+  }
+  .dialog-content .modal-button {
+    min-height: 40px;
+    padding: 10px;
+  }
+}
+@media (max-height: 500px) {
+  .workspace {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(240px, 1fr);
+    align-items: stretch;
+  }
+  .workspace .scene-panel {
+    height: 100%;
+  }
+  .workspace .action-column {
+    justify-content: center;
+  }
+}
+
+/* Mobile play dock: progress beside the action, leaving the office most of the height. */
+@media (max-width: 700px) {
+  #app[data-tab='company'] .page-heading {
+    display: none;
+  }
+  .workspace .action-column {
+    flex: 0 0 auto;
+    gap: 5px;
+  }
+  .workspace .project-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 118px;
+    grid-template-rows: auto auto auto 6px auto;
+    gap: 3px 12px;
+    padding: 9px 11px;
+    align-items: center;
+  }
+  .workspace .project-card h2 {
+    grid-column: 1;
+    grid-row: 1;
+    max-width: none;
+    padding: 0;
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.2;
+  }
+  .workspace .project-rewards {
+    position: static;
+    grid-column: 1;
+    grid-row: 2;
+    margin: 0;
+    gap: 0;
+    justify-content: flex-start;
+  }
+  .workspace .project-rewards .reward-money {
+    padding: 2px 5px;
+    font-size: 12px;
+  }
+  .workspace .project-rewards svg {
+    width: 14px;
+    height: 14px;
+  }
+  .workspace .progress-label {
+    grid-column: 1;
+    grid-row: 3;
+    margin: 0;
+    font-size: 11px;
+  }
+  .workspace #project-bar {
+    grid-column: 1;
+    grid-row: 4;
+    height: 6px;
+  }
+  .workspace .work-button {
+    grid-column: 2;
+    grid-row: 1 / 5;
+    align-self: center;
+    justify-content: center;
+    width: 118px;
+    height: 52px;
+    min-height: 52px;
+    padding: 6px 8px;
+    margin: 0;
+    gap: 0;
+    text-align: center;
+    box-shadow: 0 3px 0 #a2632d;
+  }
+  .workspace .work-button > svg,
+  .workspace .work-arrow {
+    display: none;
+  }
+  .workspace .work-button strong {
+    font-size: 17px;
+    line-height: 1.2;
+  }
+  .workspace .work-button small {
+    font-size: 11px;
+    line-height: 1.2;
+    margin-top: 3px;
+  }
+  .workspace .focus-row {
+    grid-column: 1 / -1;
+    grid-row: 5;
+    margin: 4px 0 0;
+    font-size: 11px;
+  }
+  .workspace .queue-notice {
+    grid-column: 1 / -1;
+    grid-row: 6;
+    margin: 3px 0 0;
+    padding: 4px 6px;
+    font-size: 11px;
+  }
+  .workspace .project-card .card-top,
+  .workspace .project-card .muted,
+  .workspace .focus-hint {
+    display: none;
+  }
+  .workspace .scene-panel {
+    min-height: 0;
+  }
+  .workspace .goal-card {
+    padding: 3px 9px;
+  }
+}
+@media (max-width: 370px) {
+  .workspace .project-card {
+    grid-template-columns: minmax(0, 1fr) 106px;
+    gap: 3px 8px;
+  }
+  .workspace .work-button {
+    width: 106px;
+  }
+}
